@@ -34,7 +34,8 @@ class SklearnModelController:
             return RegressorChain(LinearSVR())
         elif model_type == 'GB':
             return MultiOutputRegressor(GradientBoostingRegressor())
-        print('Unsuported classifier')
-        return 0
+        else:
+            print('Unsuported classifier')
+            return 0
 
 

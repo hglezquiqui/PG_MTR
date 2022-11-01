@@ -1,5 +1,6 @@
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import RepeatedKFold
+from sklearn.model_selection import cross_val_score, train_test_split, RepeatedKFold
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+import numpy as np
 from numpy import absolute
 from numpy import mean
 from numpy import std
@@ -28,9 +29,6 @@ class SklearnModelTrainController:
 
             mse = average_relative_root_mean_squared_error(y_pred, y_test)
             results.append(mse)
-
-        print('MAE_%s: %.3f (%.3f)' %
-              (model_type, mean(results), std(results)))
         return results
 
     def fit_model_distributed(self, X, y, model):
@@ -42,6 +40,4 @@ class SklearnModelTrainController:
         mse = []
         for i in range(y_test.shape[1]):
             mse.append(np.sqrt(mean_squared_error(y_test[:, i], y_pred[:, i])))
-
-        print('MSE_%s: %.3f (%.3f)' % (model_type, mean(mse), std(mse)))
         return mse
