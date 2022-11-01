@@ -10,7 +10,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 
 class SklearnModelController:
 
-    def build_model_by_type(model_type):
+    def build_model_by_type(self, model_type):
         if model_type == 'LR':
             return LinearRegression()
         elif model_type == 'KNN':

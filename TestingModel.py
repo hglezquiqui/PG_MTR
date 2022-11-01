@@ -5,7 +5,7 @@ from model.train.SklearnModelTrainController import SklearnModelTrainController
 
 class TestingModel:
 
-    def sklearn_models_test():
+    def sklearn_models_test(self):
         X, y = DataController.create_random_regression_problem(
             500, 10, 5, 5, 1, 0.5
         )
