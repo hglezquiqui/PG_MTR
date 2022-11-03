@@ -2,6 +2,9 @@ from sklearn.datasets import make_regression
 import pandas as pd
 from scipy.io import arff
 from sklearn.preprocessing import StandardScaler
+from pathlib import Path
+import sys
+import os
 
 
 def create_random_regression_problem(
@@ -23,16 +26,17 @@ def create_random_regression_problem(
 
 
 def read_mtr_arff(dataset):
+    sys.path.insert(0, os.path.join(os.path.dirname(sys.path[0]),"PG_MTR/data/repositories"))
     dataset_name = dataset['name'][0]
     q = dataset['output'][0]
     # print(q)
-    pthTr = dataset_name+'/' + dataset_name+'-train.arff'
+    pthTr = Path(sys.path[0], dataset_name+'/' + dataset_name+'-train.arff')
     xTr = arff.loadarff(pthTr)
     df = pd.DataFrame(xTr[0])
 
     XTr = df.iloc[:, :-q]
     YTr = df.iloc[:, -q:]
-    pthTe = dataset_name+'/' + dataset_name+'-test.arff'
+    pthTe = Path(sys.path[0], dataset_name+'/' + dataset_name+'-test.arff')
     xTe = arff.loadarff(pthTe)
     df = pd.DataFrame(xTe[0])
 

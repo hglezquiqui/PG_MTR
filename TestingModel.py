@@ -1,27 +1,33 @@
-from data import DataController as dataController
-from model.machine_learning import SklearnModelController as sklearnModelController
-from model.train import SklearnModelTrainController as sklearnModelTrainController
+from data.DataController import *
+from model.machine_learning.SklearnModelController import *
+from model.train.SklearnModelTrainController import *
+from function.function import *
+from function.graphic import *
 from numpy import mean
 from numpy import std
-import seaborn as sbn
 import warnings
 warnings.filterwarnings('ignore')
 
 
-def sklearn_models_test():
-    X, y = dataController.create_random_regression_problem(
+def MTR_EA():
+    X, y = create_random_regression_problem(
         500, 10, 5, 5, 1, 0.5
     )
     model_type = ['LR', 'KNN', 'DT', 'RF', 'MRF', 'SVR', 'RC_SVR', 'GB']
     result = {}
     result.fromkeys(model_type)
     for m in model_type:
-        model = sklearnModelController.build_model_by_type(m)
-        result[m] = sklearnModelTrainController.fit_model(
+        model = build_model_by_type(m)
+        result[m] = fit_model(
             X, y, model, "AVERAGE")
         print('MSE_%s: %.3f (%.3f)' %
               (m, mean(result[m]), std(result[m])))
     print(result)
 
 
-sklearn_models_test()
+def GMLR1(dataset):
+    X_train, X_test, y_train, y_test = read_mtr_arff(dataset)
+    xk, zk, cri, fobj = lasso_pgfit(X_train, y_train)
+    plot_and_reconstructed(dataset, xk, zk)
+    plot_objective_function_values(dataset, cri, fobj)
+
