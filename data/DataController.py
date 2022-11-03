@@ -31,7 +31,6 @@ def read_mtr_arff(dataset):
     q = dataset['output'][0]
     # print(q)
     pthTr = Path(sys.path[0], dataset_name+'/' + dataset_name+'-train.arff')
-    print(pthTr)
     xTr = arff.loadarff(pthTr)
     df = pd.DataFrame(xTr[0])
 
