@@ -31,9 +31,3 @@ def GMLR1(dataset):
     plot_and_reconstructed(dataset, xk, zk)
     plot_objective_function_values(dataset, cri, fobj)
 
-
-dataset = {'name': ['enb'],
-           'output': [2]
-           }
-
-GMLR1(dataset)
