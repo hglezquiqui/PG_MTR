@@ -9,19 +9,15 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-def MTR_EA():
-    X, y = create_random_regression_problem(
-        500, 10, 5, 5, 1, 0.5
-    )
+def MTR_EA(mse_type):
+    X, y = create_random_regression_problem(500, 10, 5, 5, 1, 0.5)
     model_type = ['LR', 'KNN', 'DT', 'RF', 'MRF', 'SVR', 'RC_SVR', 'GB']
     result = {}
     result.fromkeys(model_type)
     for m in model_type:
         model = build_model_by_type(m)
-        result[m] = fit_model(
-            X, y, model, "AVERAGE")
-        print('MSE_%s: %.3f (%.3f)' %
-              (m, mean(result[m]), std(result[m])))
+        result[m] = fit_model(X, y, model, mse_type)
+        print('%s_%s: %.3f (%.3f)' % (mse_type, m, mean(result[m]), std(result[m])))
     print(result)
 
 

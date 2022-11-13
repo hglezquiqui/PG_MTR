@@ -1,5 +1,7 @@
 import numpy as np
 from numpy.linalg import inv
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+import math
 
 
 def objective_function(A, x, z, b, lamda):
@@ -155,3 +157,19 @@ def lasso_pgfit(A, b):
         if (min(Dobj, Dobjz) < 1):
             break
     return xk, zk, cri, fobj
+
+
+def RMSE(actual, predicted):
+    MSE = mean_squared_error(actual, predicted)
+    RMSE = math.sqrt(MSE)
+    return RMSE
+
+
+def MAE(acutal, predicted):
+    MAE = mean_absolute_error(acutal, predicted)
+    return MAE
+
+
+def MAPE(actual, predicted):
+    MAPE = MAE(actual, predicted) * 100
+    return MAPE
